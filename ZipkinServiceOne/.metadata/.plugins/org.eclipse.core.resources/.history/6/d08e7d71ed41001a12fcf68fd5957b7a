@@ -1,0 +1,5 @@
+package com.moon.zipkindemo;
+
+public class ZipkinDemoApplication {
+
+}

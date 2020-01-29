@@ -1,0 +1,91 @@
+package com.moon.zipkindemo.controller;
+
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.sleuth.sampler.AlwaysSampler;
+import org.springframework.context.annotation.Bean;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import com.moon.zipkindemo.model.Location;
+import com.moon.zipkindemo.model.Message;
+
+@RestController
+@RequestMapping("/users")
+public class LocationController {
+	@Autowired
+	HttpServletRequest request;
+
+	@Autowired
+	RestTemplate restTemplate;
+
+	@Bean
+	public RestTemplate getRestTemplate() {
+		return new RestTemplate();
+	}
+
+	@Bean
+	public AlwaysSampler alwaysSampler() {
+		return new AlwaysSampler();
+	}
+
+	private static final Logger logger = LoggerFactory.getLogger(LocationController.class);
+
+	@RequestMapping(value = "/{name}/location", method = RequestMethod.GET)
+
+	public List<Location> getLocation(@PathVariable String name) {
+		logger.info("getLocation " + name);
+
+		List<Location> locationList = new ArrayList<Location>();
+		locationList.add(new Location("SK", 1234));
+
+		// print header for tracing
+		getHeadersInfo(request);
+		return locationList;
+	}
+
+	public List<Message> getMessage(@PathVariable String name) {
+		logger.info("getLocation " + name);
+
+		
+		// app4
+		List<Message> messageList = (List<Message>) restTemplate
+				.exchange("http://localhost:9003/users/" + name + "/message", HttpMethod.GET, null,
+						new ParameterizedTypeReference<List<Message>>() {
+						})
+				.getBody();
+		// print header for tracing
+		getHeadersInfo(request);
+		return messageList;
+	}
+
+	private Map<String, String> getHeadersInfo(HttpServletRequest request) {
+
+		Map<String, String> map = new HashMap<String, String>();
+
+		Enumeration headerNames = request.getHeaderNames();
+		while (headerNames.hasMoreElements()) {
+			String key = (String) headerNames.nextElement();
+			String value = request.getHeader(key);
+			System.out.println(key + ":" + value);
+			map.put(key, value);
+		}
+
+		return map;
+	}
+
+}

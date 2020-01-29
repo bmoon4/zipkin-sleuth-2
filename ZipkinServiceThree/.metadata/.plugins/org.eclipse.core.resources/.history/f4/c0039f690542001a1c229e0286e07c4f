@@ -1,0 +1,31 @@
+package com.moon.zipkindemo.model;
+
+
+public class Location {
+	String province;
+	int storeId;
+
+	public Location() {
+	}
+
+	public Location(String province, int storeId) {
+		this.province=province;
+		this.storeId=storeId;
+	}
+
+	public String getProvince() {
+		return province;
+	}
+
+	public int getStoreId() {
+		return storeId;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	public void setStoreId(int storeId) {
+		this.storeId = storeId;
+	}
+}

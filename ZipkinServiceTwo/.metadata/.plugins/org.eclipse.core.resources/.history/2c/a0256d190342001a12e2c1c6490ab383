@@ -1,0 +1,81 @@
+package com.moon.zipkindemo.controller;
+
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import com.moon.zipkindemo.model.Item;
+import com.moon.zipkindemo.model.Location;
+
+
+
+@RestController
+@RequestMapping("/users")
+public class ItemController {
+	@Autowired
+	HttpServletRequest request;
+	 
+	@Autowired
+	    RestTemplate restTemplate;
+	
+	   @Bean
+	    public RestTemplate getRestTemplate() {
+	        return new RestTemplate();
+	    }
+	    
+	    @Bean
+	    public AlwaysSampler alwaysSampler() {
+	        return new AlwaysSampler();
+	    }
+	    
+	private static final Logger logger = LoggerFactory.getLogger(ItemController.class);
+	@RequestMapping(value="/{name}/items",method=RequestMethod.GET)
+	public List<Item> getItem(@PathVariable String name){
+		logger.info("getItem "+name);
+		
+		List<Item> itemList = new ArrayList<Item>();
+		itemList.add(new Item("computer",1));
+		itemList.add(new Item("mouse",2));
+		
+		List<Location> locationList = (List<Location>)restTemplate.exchange("http://localhost:8084/users/"+name+"/items/location"
+				,HttpMethod.GET,null
+				,new ParameterizedTypeReference<List<Location>>() {}).getBody();
+		
+		getHeadersInfo(request);
+		return itemList;
+	}
+	
+	
+	
+	private Map<String, String> getHeadersInfo(HttpServletRequest request) {
+
+        Map<String, String> map = new HashMap<String, String>();
+
+		Enumeration headerNames = request.getHeaderNames();
+        while (headerNames.hasMoreElements()) {
+            String key = (String) headerNames.nextElement();
+            String value = request.getHeader(key);
+            System.out.println(key+":"+value);
+            map.put(key, value);
+        }
+
+        return map;
+    }
+	
+	
+}
