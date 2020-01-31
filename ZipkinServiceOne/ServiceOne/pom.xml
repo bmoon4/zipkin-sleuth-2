@@ -42,6 +42,7 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>1.8.0-beta4</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jersey</artifactId>
@@ -74,17 +75,16 @@
 	<build>
 		<plugins>
 			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>8</source>
+					<target>8</target>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>2.2.2.RELEASE</version>
-				<configuration>
-					<systemProperties>
-						<systemProperty>
-							<name>test</name>
-							<value>value1</value>
-						</systemProperty>
-					</systemProperties>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
