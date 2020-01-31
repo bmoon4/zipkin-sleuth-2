@@ -25,6 +25,23 @@
 	</properties>
 
 	<dependencies>
+		<!--	logging framework	-->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>2.13.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.13.0</version>
+		</dependency>
+		<!--	facade for logging framework	-->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.8.0-beta4</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jersey</artifactId>
@@ -59,6 +76,15 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>2.2.2.RELEASE</version>
+				<configuration>
+					<systemProperties>
+						<systemProperty>
+							<name>test</name>
+							<value>value1</value>
+						</systemProperty>
+					</systemProperties>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
