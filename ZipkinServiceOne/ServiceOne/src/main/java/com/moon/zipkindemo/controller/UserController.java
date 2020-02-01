@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.splunk.logging.*;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,12 +39,13 @@ public class UserController {
         return new AlwaysSampler();
     }
 	
-	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-	
+    //private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+	private static final Logger logger = LoggerFactory.getLogger("splunk.logger");
+
 	@RequestMapping(value="/{name}",method=RequestMethod.GET)
 	public List<User> getUsers(@PathVariable String name){
 		logger.info("User service "+name);
-		
+		//logger2.info("User service "+name);
 		List<User> usersList = new ArrayList<User>();
 		
 		//app1
@@ -60,7 +63,8 @@ public class UserController {
 				,new ParameterizedTypeReference<List<Message>>() {}).getBody();
 		
 		usersList.add(new User(name, name+"@mygoogle.com",itemList, locationList, messageList));
-				
+	
+		
 		return usersList;
 	}
 

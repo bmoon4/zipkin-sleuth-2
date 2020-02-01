@@ -1,0 +1,23 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: zipkin-demo-server1
+  zipkin:
+    baseUrl: http://127.0.0.1:9411/
+  sleuth:
+    enabled: true
+    sampler:
+      probability: 1.0
+  splunk:
+    image: splunk/splunk
+    hostname: splunk
+    environment:
+      - SPLUNK_START_ARGS=--accept-license
+      - SPLUNK_ENABLE_LISTEN=9997
+      - SPLUNK_PASSWORD=password
+    ports:
+      - "8000:8000"
+sample:
+  zipkin:
+    enabled: true

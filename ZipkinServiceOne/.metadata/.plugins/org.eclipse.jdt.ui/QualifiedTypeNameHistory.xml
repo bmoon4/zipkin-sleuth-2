@@ -2,4 +2,6 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="com.moon.zipkindemo.model.Location"/>
 <fullyQualifiedTypeName name="com.moon.zipkindemo.model.Message"/>
+<fullyQualifiedTypeName name="org.apache.http.impl.client.DefaultHttpClient"/>
+<fullyQualifiedTypeName name="org.apache.http.client.methods.HttpPost"/>
 </qualifiedTypeNameHistroy>
