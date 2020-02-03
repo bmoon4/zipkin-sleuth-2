@@ -8,8 +8,10 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
+import com.splunk.logging.*;
+import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +30,7 @@ public class MessageController {
 	HttpServletRequest request;
 	
 	private static final Logger logger = LoggerFactory.getLogger(MessageController.class);
+	//private static final Logger logger = LoggerFactory.getLogger("splunk.logger");
 	@RequestMapping(value="/{name}/message",method=RequestMethod.GET)
 	public List<Message> getMessage(@PathVariable String name){
 		logger.info("getMessage "+name);

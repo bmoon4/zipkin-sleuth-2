@@ -8,8 +8,10 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
+import com.splunk.logging.*;
+import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.sleuth.sampler.AlwaysSampler;
 import org.springframework.context.annotation.Bean;
@@ -47,7 +49,7 @@ public class LocationController {
 	}
 
 	private static final Logger logger = LoggerFactory.getLogger(LocationController.class);
-
+	//private static final Logger logger = LoggerFactory.getLogger("splunk.logger");
 	@RequestMapping(value = "/{name}/location", method = RequestMethod.GET)
 
 	public List<Location> getLocation(@PathVariable String name) {

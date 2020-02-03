@@ -10,6 +10,7 @@
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.moon.zipkindemo.ZipkinDemoApplication"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="ServiceTwo"/>
 <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.springframework.ide.eclipse.boot.launch.BootMavenSourcePathProvider"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Djava.util.logging.config.file=./target/classes/logging.properties"/>
 <stringAttribute key="process_factory_id" value="org.springframework.ide.eclipse.boot.launch.process.BootProcessFactory"/>
 <booleanAttribute key="spring.boot.ansi.console" value="true"/>
 <stringAttribute key="spring.boot.app.properties" value=""/>

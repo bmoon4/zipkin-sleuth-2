@@ -2,9 +2,10 @@ package com.moon.zipkindemo.controller;
 import java.util.ArrayList;
 
 import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 import com.splunk.logging.*;
+import org.slf4j.*;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,8 +40,8 @@ public class UserController {
         return new AlwaysSampler();
     }
 	
-    //private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-	private static final Logger logger = LoggerFactory.getLogger("splunk.logger");
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+	//private static final Logger logger = LoggerFactory.getLogger("splunk.logger");
 
 	@RequestMapping(value="/{name}",method=RequestMethod.GET)
 	public List<User> getUsers(@PathVariable String name){
@@ -48,7 +49,7 @@ public class UserController {
 		//logger2.info("User service "+name);
 		List<User> usersList = new ArrayList<User>();
 		
-		//app1
+		//app2
 		List<Item> itemList = (List<Item>)restTemplate.exchange("http://localhost:9001/users/"+name+"/items"
 										,HttpMethod.GET,null
 										,new ParameterizedTypeReference<List<Item>>() {}).getBody();
@@ -57,7 +58,7 @@ public class UserController {
 				,HttpMethod.GET,null
 				,new ParameterizedTypeReference<List<Location>>() {}).getBody();
 		
-		//app4
+		//app3
 		List<Message> messageList = (List<Message>)restTemplate.exchange("http://localhost:9002/users/"+name+"/location2"
 				,HttpMethod.GET,null
 				,new ParameterizedTypeReference<List<Message>>() {}).getBody();
