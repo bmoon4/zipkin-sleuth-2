@@ -27,19 +27,10 @@ import org.springframework.http.HttpMethod;
 @RestController
 @RequestMapping("/users")
 public class UserController {
-    @Autowired
-    RestTemplate restTemplate;
-    
-    @Bean
-    public RestTemplate getRestTemplate() {
-        return new RestTemplate();
-    }
-    
-    @Bean
-    public AlwaysSampler alwaysSampler() {
-        return new AlwaysSampler();
-    }
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 	
+<<<<<<< HEAD
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	//private static final Logger logger = LoggerFactory.getLogger("splunk.logger");
 
@@ -47,6 +38,14 @@ public class UserController {
 	public List<User> getUsers(@PathVariable String name){
 		logger.info("User service "+name);
 		//logger2.info("User service "+name);
+=======
+    @Autowired
+    private RestTemplate restTemplate;
+	
+	@RequestMapping(value="/{name}",method=RequestMethod.GET)
+	public List<User> getUsers(@PathVariable String name){
+		LOGGER.info("User service "+name);
+>>>>>>> 93ab5e56767d454b3655deb8b89b6c234e70124a
 		List<User> usersList = new ArrayList<User>();
 		
 		//app2
